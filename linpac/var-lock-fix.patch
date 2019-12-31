@@ -1,0 +1,21 @@
+diff -ur orig/linpac-0.25/src/linpac.cc linpac-0.25/src/linpac.cc
+--- orig/linpac-0.25/src/linpac.cc	2017-12-11 05:47:34.000000000 +0100
++++ linpac-0.25/src/linpac.cc	2018-11-27 22:54:55.015181082 +0100
+@@ -263,7 +263,7 @@
+   FILE *lock;
+   char keyfile[256];
+ 
+-  sprintf(keyfile, "/var/lock/LinPac.%i", getuid());
++  sprintf(keyfile, "/var/tmp/LinPac.%i", getuid());
+   lock = fopen(keyfile, "r");
+   if (lock != NULL)
+   {
+@@ -295,7 +295,7 @@
+ void create_lock()
+ {
+   int lock;
+-  sprintf(keyfile, "/var/lock/LinPac.%i", getuid());
++  sprintf(keyfile, "/var/tmp/LinPac.%i", getuid());
+   lock = open(keyfile, O_RDWR | O_CREAT, 0600);
+   if (lock == -1)
+   {
