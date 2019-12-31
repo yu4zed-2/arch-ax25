@@ -1,0 +1,145 @@
+diff -ur node-0.3.2-orig/Makefile node-0.3.2/Makefile
+--- node-0.3.2-orig/Makefile	2019-12-31 12:15:12.900492654 +0100
++++ node-0.3.2/Makefile	2019-12-31 12:16:17.030576615 +0100
+@@ -24,12 +24,10 @@
+ install: installbin installman installhelp installconf
+ 	install -m 755 -D -o root -g root -d		 $(VAR_DIR)/node
+ 	install -m 644 -D -o root -g root etc/loggedin	 $(VAR_DIR)/node
+-	@rm -f /usr/bin/node
+-	@rm -f /usr/bin/nodeusers
+ 
+ installbin: all
+-	install -m 4755 -D -s -o root -g root node		 $(SBIN_DIR)/node
+-	install -m 755  -D -s -o root -g root nodeusers	 $(SBIN_DIR)/nodeusers
++	install -m 4755 -D -s -o root -g root node		 $(SBIN_DIR)/ax25-node
++	install -m 755  -D -s -o root -g root nodeusers	 $(SBIN_DIR)/ax25-nodeusers
+ 
+ installhelp:
+ 	install -m 755 -D -o root -g root -d		 $(LIB_DIR)/ax25/node/help
+@@ -42,10 +40,10 @@
+ 	install -m 600 -D -o root -g root etc/node.motd  $(ETC_DIR)
+ 
+ installman:
+-	install -m 644 -D -o root -g root man/nodeusers.1  $(MAN_DIR)/man1/nodeusers.1
+-	install -m 644 -D -o root -g root man/node.conf.5  $(MAN_DIR)/man5/node.conf.5
+-	install -m 644 -D -o root -g root man/node.perms.5 $(MAN_DIR)/man5/node.perms.5
+-	install -m 644 -D -o root -g root man/node.8       $(MAN_DIR)/man8/node.8
++	install -m 644 -D -o root -g root man/nodeusers.1  $(MAN_DIR)/man1/ax25-nodeusers.1
++	install -m 644 -D -o root -g root man/node.conf.5  $(MAN_DIR)/man5/ax25-node.conf.5
++	install -m 644 -D -o root -g root man/node.perms.5 $(MAN_DIR)/man5/ax25-node.perms.5
++	install -m 644 -D -o root -g root man/node.8       $(MAN_DIR)/man8/ax25-node.8
+ 
+ clean:
+ 	rm -f *.o *~ *.bak *.orig
+diff -ur node-0.3.2-orig/man/node.8 node-0.3.2/man/node.8
+--- node-0.3.2-orig/man/node.8	1999-06-16 21:08:00.000000000 +0200
++++ node-0.3.2/man/node.8	2019-12-31 12:18:46.630772469 +0100
+@@ -1,8 +1,8 @@
+ .TH NODE 8 "16 June 1999" Linux "Linux System Managers Manual"
+ .SH NAME
+-node \- Node front end for AX.25, NET/ROM, Rose and TCP
++ax25-node \- Node front end for AX.25, NET/ROM, Rose and TCP
+ .SH SYNOPSIS
+-.B node [-c]
++.B ax25-node [-c]
+ .SH DESCRIPTION
+ .LP
+ .B Node
+@@ -223,8 +223,8 @@
+ .B /usr/lib/ax25/node/help/*.hlp
+ The online help files.
+ .SH "SEE ALSO"
+-.BR node.conf (5),
+-.BR node.perms (5),
++.BR ax25-node.conf (5),
++.BR ax25-node.perms (5),
+ .BR axports (5),
+ .BR ax25d (8),
+ .BR mheardd (8).
+diff -ur node-0.3.2-orig/man/node.conf.5 node-0.3.2/man/node.conf.5
+--- node-0.3.2-orig/man/node.conf.5	1999-06-16 21:44:24.000000000 +0200
++++ node-0.3.2/man/node.conf.5	2019-12-31 12:19:00.190790223 +0100
+@@ -1,6 +1,6 @@
+ .TH NODE.CONF 5 "16 June 1999" Linux "Linux Programmer's Manual"
+ .SH NAME
+-node.conf \- LinuxNode configuration file.
++ax25-node.conf \- LinuxNode configuration file.
+ .SH DESCRIPTION
+ .LP
+ .B Node.conf
+@@ -318,7 +318,7 @@
+ .LP
+ /etc/ax25/node.conf
+ .SH "SEE ALSO"
+-.BR node (8),
+-.BR node.perms (5),
++.BR ax25-node (8),
++.BR ax25-node.perms (5),
+ .BR axports (5),
+ .BR ax25 (4).
+diff -ur node-0.3.2-orig/man/node.perms.5 node-0.3.2/man/node.perms.5
+--- node-0.3.2-orig/man/node.perms.5	1999-06-16 21:11:07.000000000 +0200
++++ node-0.3.2/man/node.perms.5	2019-12-31 12:19:12.800806731 +0100
+@@ -1,6 +1,6 @@
+ .TH NODE.PERMS 5 "16 June 1999" Linux "Linux Programmer's Manual"
+ .SH NAME
+-node.perms \- LinuxNode permissions file.
++ax25-node.perms \- LinuxNode permissions file.
+ .SH DESCRIPTION
+ .LP
+ .B Node.perms
+@@ -108,7 +108,7 @@
+ .LP
+ /etc/ax25/node.perms
+ .SH "SEE ALSO"
+-.BR node (8),
+-.BR node.conf (5),
++.BR ax25-node (8),
++.BR ax25-node.conf (5),
+ .BR axports (5),
+ .BR ax25 (4).
+diff -ur node-0.3.2-orig/man/nodeusers.1 node-0.3.2/man/nodeusers.1
+--- node-0.3.2-orig/man/nodeusers.1	1999-06-16 21:13:12.000000000 +0200
++++ node-0.3.2/man/nodeusers.1	2019-12-31 12:19:23.200820347 +0100
+@@ -1,8 +1,8 @@
+ .TH NODEUSERS 1 "16 June 1999" Linux "Linux Programmer's Manual"
+ .SH NAME
+-nodeusers \- LinuxNode user information lookup program
++ax25-nodeusers \- LinuxNode user information lookup program
+ .SH SYNOPSIS
+-.B nodeusers [-a] [-i] [-l]
++.B ax25-nodeusers [-a] [-i] [-l]
+ .SH DESCRIPTION
+ .LP
+ .B Nodeusers 
+@@ -27,6 +27,6 @@
+ .B /var/ax25/node/loggedin
+ Database of current users.
+ .SH "SEE ALSO"
+-.BR node (8)
++.BR ax25-node (8)
+ .SH AUTHOR
+ Tomi Manninen OH2BNS <tpmannin@cc.hut.fi>
+diff -ur node-0.3.2-orig/nodeusers.c node-0.3.2/nodeusers.c
+--- node-0.3.2-orig/nodeusers.c	2003-03-06 19:30:51.000000000 +0100
++++ node-0.3.2/nodeusers.c	2019-12-31 12:16:47.060615930 +0100
+@@ -54,16 +54,16 @@
+ 			logging = 1;
+ 			break;
+ 		default:
+-			fprintf(stderr, "usage: nodeusers [-a] [-i] [-l]\r\n");
++			fprintf(stderr, "usage: ax25-nodeusers [-a] [-i] [-l]\r\n");
+ 			return 1;
+                 }
+         }
+ 	if (logging)
+-		openlog("nodeusers", LOG_PID, LOG_DAEMON);
++		openlog("ax25-nodeusers", LOG_PID, LOG_DAEMON);
+ 	signal(SIGPIPE, pipe_handler);
+ 	NodeIo = axio_init(STDIN_FILENO, STDOUT_FILENO, len, cp);
+ 	if (NodeIo == NULL) {
+-		fprintf(stderr, "nodeusers: axio_init failed\r\n");
++		fprintf(stderr, "ax25-nodeusers: axio_init failed\r\n");
+ 		return 1;
+ 	}
+ 	if (inet && axio_getline(NodeIo) == NULL) {

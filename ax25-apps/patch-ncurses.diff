@@ -1,0 +1,11 @@
+--- call/call.c.bak	2019-12-31 12:03:31.549574442 +0100
++++ call/call.c	2019-12-31 12:03:38.829583973 +0100
+@@ -42,7 +42,7 @@
+ #include <unistd.h>
+ #include <wchar.h>
+ #include <wctype.h>
+-#include <ncursesw/ncurses.h>
++#include <ncurses.h>
+ #include <locale.h>
+ #include <iconv.h>
+ #include <sys/ioctl.h>
