@@ -11,7 +11,7 @@ diff -ur node-0.3.2-orig/Makefile node-0.3.2/Makefile
  installbin: all
 -	install -m 4755 -D -s -o root -g root node		 $(SBIN_DIR)/node
 -	install -m 755  -D -s -o root -g root nodeusers	 $(SBIN_DIR)/nodeusers
-+	install -m 4755 -D -s -o root -g root node		 $(SBIN_DIR)/ax25-node
++	install -m 755 -D -s -o root -g root node		 $(SBIN_DIR)/ax25-node
 +	install -m 755  -D -s -o root -g root nodeusers	 $(SBIN_DIR)/ax25-nodeusers
  
  installhelp:
